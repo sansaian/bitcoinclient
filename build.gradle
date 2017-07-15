@@ -1,0 +1,42 @@
+group 'smartdev'
+version '1.0-SNAPSHOT'
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'bitconoid'
+    version =  '0.1.0'
+    manifest {
+        attributes "Main-Class": "ru.smartdev.Application"
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module : 'spring-boot-starter-logging'
+    }
+    compile group: 'commons-logging', name: 'commons-logging', version: '1.2'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.1.2'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+}
